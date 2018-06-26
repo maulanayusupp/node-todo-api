@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/maulanayusupp/node-todo-api#readme",
   "dependencies": {
-    "mongodb": "^3.0.10"
+    "mongodb": "^3.0.10",
+    "mongoose": "^5.1.6"
   }
 }
