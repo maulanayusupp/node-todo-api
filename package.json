@@ -1,0 +1,26 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Nodejs Todo API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maulanayusupp/node-todo-api.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "API"
+  ],
+  "author": "Maulana Yusup Abdullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maulanayusupp/node-todo-api/issues"
+  },
+  "homepage": "https://github.com/maulanayusupp/node-todo-api#readme",
+  "dependencies": {
+    "mongodb": "^3.0.10"
+  }
+}
