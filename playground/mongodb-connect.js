@@ -1,4 +1,18 @@
-const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb');
+
+// object id
+var objectId = new ObjectID();
+
+// structuring
+var user = {
+	first_name: 'Maulana Yusup',
+	last_name: 'Abdullah',
+	email: 'maulanayusupp@gmail.com',
+	age: 23,
+	location: 'Bandung'
+};
+var {first_name} = user;
 
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
 	if (err) {
@@ -7,12 +21,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
 	console.log('Connected to MongoDB Server')
 	const db = client.db('TodoApp');
 
-	db.collection('users').insertOne({
-		first_name: 'Maulana Yusup',
-		last_name: 'Abdullah',
-		age: 23,
-		location: 'Bandung'
-	},(err, result) => {
+	db.collection('users').insertOne(user,(err, result) => {
 		if (err) {
 			console.log('Unable to insert user ', err);
 		}
@@ -20,10 +29,11 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
 		console.log(JSON.stringify(result.ops, undefined, 2));
 	});
 
-	db.collection('todos').insertOne({
+	var todoParams = {
 		name: 'Cooking',
-		completed: 'Cooking'
-	},(err, result) => {
+		completed: true
+	};
+	db.collection('todos').insertOne(todoParams,(err, result) => {
 		if (err) {
 			console.log('Unable to insert todo ', err);
 		}
