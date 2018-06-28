@@ -65,7 +65,7 @@ app.post('/todos', (req, res) => {
 	})
 });
 
-// Get /todos/1231
+// Get by id
 app.get('/todos/:id', (req, res) => {
 	var id = req.params.id;
 
@@ -82,6 +82,26 @@ app.get('/todos/:id', (req, res) => {
 		res.send(todo);
 	}).catch((e) => {
 		res.status(400).send('Unable to get todo', e);
+	});
+});
+
+// Remove todo by id
+app.delete('/todos/:id', (req, res) => {
+	var id = req.params.id;
+
+	// is valid
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send('ID is not valid', id);
+	}
+
+	// findById
+	Todo.findByIdAndRemove(id).then((todo) => {
+		if (!todo) {
+			return res.status(404).send('Id not found');
+		}
+		res.send(todo);
+	}).catch((e) => {
+		res.status(400).send('Unable to remove todo', e);
 	});
 });
 
