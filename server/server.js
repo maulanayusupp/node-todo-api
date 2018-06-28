@@ -19,30 +19,6 @@ app.listen(PORT, () => {
 	console.log(`Started on port ${PORT}`);
 });
 
-/* users*/
-app.get('/users', (req, res) => {
-	User.find().then((users) => {
-		res.send({
-			users,
-			code: 0
-		});
-	}, (err) => {
-		res.status(400).send(err);
-	});
-});
-app.post('/users', (req, res) => {
-	var newUser = new User({
-		email: req.body.email,
-		first_name: req.body.first_name,
-		last_name: req.body.last_name
-	})
-	newUser.save().then((doc) => {
-		console.log('Saved user', doc);
-	}, (err) => {
-		console.log('Unable to save user', err);
-	})
-});
-
 /* todos */
 app.get('/todos', (req, res) => {
 	Todo.find().then((todos) => {
@@ -137,6 +113,30 @@ app.patch('/todos/:id', (req, res) => {
 		res.send({todo: todo});
 	}).catch((e) => {
 		res.status(400).send();
+	})
+});
+
+/* users*/
+app.get('/users', (req, res) => {
+	User.find().then((users) => {
+		res.send({
+			users,
+			code: 0
+		});
+	}, (err) => {
+		res.status(400).send(err);
+	});
+});
+app.post('/users', (req, res) => {
+	var newUser = new User({
+		email: req.body.email,
+		first_name: req.body.first_name,
+		last_name: req.body.last_name
+	})
+	newUser.save().then((doc) => {
+		console.log('Saved user', doc);
+	}, (err) => {
+		console.log('Unable to save user', err);
 	})
 });
 
