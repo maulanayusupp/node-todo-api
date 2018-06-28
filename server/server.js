@@ -41,6 +41,4 @@ app.post('/users', (req, res) => {
 })
 
 
-
-
-
+module.exports = {app};
