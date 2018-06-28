@@ -127,6 +127,8 @@ app.get('/users', (req, res) => {
 		res.status(400).send(err);
 	});
 });
+
+/* create new */
 app.post('/users', (req, res) => {
 	var reqBody = _.pick(req.body, ['email', 'password', 'first_name', 'last_name']);
 	var user = new User(reqBody);
@@ -138,6 +140,20 @@ app.post('/users', (req, res) => {
 	}).catch((err) => {
 		res.status(400).send(err);
 	})
+});
+
+app.get('/users/me', (req, res) => {
+	var token = req.header('x-auth');
+
+	User.findByToken(token).then((user) => {
+		if (!user) {
+			return Promise.reject();
+		}
+
+		res.send(user);
+	}).catch((e) => {
+		res.status(401).send();
+	});
 });
 
 
