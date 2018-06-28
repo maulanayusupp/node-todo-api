@@ -22,6 +22,7 @@ beforeEach((done) => {
 	}).then(() => done());
 });
 
+/* post todos */
 describe('POST /todos', () => {
 	it('should create a new todo', (done) => {
 		var text = ' test todo text';
@@ -64,6 +65,7 @@ describe('POST /todos', () => {
 	});
 });
 
+/* get todos */
 describe('GET /todos', () => {
 	it('should get all todos', (done) => {
 		request(app)
@@ -76,6 +78,7 @@ describe('GET /todos', () => {
 	})
 });
 
+/* get todos by id */
 describe('GET /todos/:id', () => {
 	it('should return todo doc', (done) => {
 		request(app)

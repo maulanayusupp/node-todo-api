@@ -4,6 +4,7 @@
   "description": "Nodejs Todo API",
   "main": "index.js",
   "scripts": {
+    "start": "npm",
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
   },
