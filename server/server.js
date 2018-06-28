@@ -5,7 +5,7 @@ var {mongoose} = require('./db/mongoose');
 var {User} = require('./models/user');
 var {Todo} = require('./models/todo');
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8000;
 
 var app = express();
 
@@ -14,18 +14,6 @@ app.use(bodyParser.json());
 app.listen(PORT, () => {
 	console.log(`Started on port ${PORT}`);
 });
-
-app.post('/todos', (req, res) => {
-	var newTodo = new Todo({
-		text: req.body.text
-	})
-	newTodo.save().then((doc) => {
-		console.log('Saved todo', doc);
-		res.send(doc);
-	}, (err) => {
-		res.status(400).send('Unable to save todo', err);
-	})
-})
 
 app.post('/users', (req, res) => {
 	var newUser = new User({
@@ -38,7 +26,29 @@ app.post('/users', (req, res) => {
 	}, (err) => {
 		console.log('Unable to save user', err);
 	})
-})
+});
 
+app.get('/todos', (req, res) => {
+	Todo.find().then((todos) => {
+		res.send({
+			todos,
+			code: 0
+		});
+	}, (err) => {
+		res.status(400).send(err);
+	});
+});
+
+app.post('/todos', (req, res) => {
+	var newTodo = new Todo({
+		text: req.body.text
+	})
+	newTodo.save().then((doc) => {
+		console.log('Saved todo', doc);
+		res.send(doc);
+	}, (err) => {
+		res.status(400).send('Unable to save todo', err);
+	})
+});
 
 module.exports = {app};
