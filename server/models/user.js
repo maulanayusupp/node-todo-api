@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const validator = require('validator')l];
+const validator = require('validator');
 
 var User = mongoose.model('User', {
 	first_name: {
@@ -29,11 +29,11 @@ var User = mongoose.model('User', {
 	tokens: [
 		{
 			access: {
-				type: String
+				type: String,
 				required: true
 			},
 			token: {
-				type: String
+				type: String,
 				required: true
 			}
 		}

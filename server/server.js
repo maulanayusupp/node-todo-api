@@ -116,7 +116,7 @@ app.patch('/todos/:id', (req, res) => {
 	})
 });
 
-/* users*/
+/* users */
 app.get('/users', (req, res) => {
 	User.find().then((users) => {
 		res.send({
@@ -128,15 +128,13 @@ app.get('/users', (req, res) => {
 	});
 });
 app.post('/users', (req, res) => {
-	var newUser = new User({
-		email: req.body.email,
-		first_name: req.body.first_name,
-		last_name: req.body.last_name
-	})
+	var reqBody = _.pick(req.body, ['email', 'password', 'first_name', 'last_name']);
+	var newUser = new User(reqBody);
+
 	newUser.save().then((doc) => {
-		console.log('Saved user', doc);
-	}, (err) => {
-		console.log('Unable to save user', err);
+		res.send(doc);
+	}).catch((err) => {
+		res.status(400).send(err);
 	})
 });
 
