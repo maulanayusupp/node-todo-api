@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 var {mongoose} = require('./db/mongoose');
 var {User} = require('./models/user');
 var {Todo} = require('./models/todo');
+var {authenticate} = require('./middleware/authenticate');
 
 var PORT = process.env.PORT || 8000;
 
@@ -142,18 +143,8 @@ app.post('/users', (req, res) => {
 	})
 });
 
-app.get('/users/me', (req, res) => {
-	var token = req.header('x-auth');
-
-	User.findByToken(token).then((user) => {
-		if (!user) {
-			return Promise.reject();
-		}
-
-		res.send(user);
-	}).catch((e) => {
-		res.status(401).send();
-	});
+app.get('/users/me', authenticate, (req, res) => {
+	res.send(req.user);
 });
 
 
