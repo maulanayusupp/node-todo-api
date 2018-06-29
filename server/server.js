@@ -133,7 +133,7 @@ app.get('/users', (req, res) => {
 app.post('/users', (req, res) => {
 	var reqBody = _.pick(req.body, ['email', 'password', 'first_name', 'last_name']);
 	var user = new User(reqBody);
-
+	console.log(user)
 	user.save().then(() => {
 		return user.generateAuthToken();
 	}).then((token) => {
