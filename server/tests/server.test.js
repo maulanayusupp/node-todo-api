@@ -8,19 +8,10 @@ const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 const {User} = require('./../models/user');
 
-const todos = [{
-	_id: new ObjectID(),
-	text: 'First test todo'
-},{
-	_id: new ObjectID(),
-	text: 'Second test todo'
-}];
+const {todos, populateTodos, populateUsers} = require('./seed/seed');
 
-beforeEach((done) => {
-	Todo.remove({}).then(() => {
-		return Todo.insertMany(todos);
-	}).then(() => done());
-});
+beforeEach(populateUsers);
+beforeEach(populateTodos);
 
 /* post todos */
 describe('POST /todos', () => {
