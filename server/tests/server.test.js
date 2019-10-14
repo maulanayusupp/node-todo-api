@@ -238,7 +238,18 @@ describe('POST /users', () => {
 	it('should return validation errors if request invalid', function(done) {
 		request(app)
 			.post('/users')
-			.send({email: 'asdfa', password: 'bla'})
+			.send({email: 'crylikebaby2992@gmail.com', password: 'asdfasdf'})
+			.expect(400)
+			.end(done);
+	});
+
+	it('should return validation errors if request invalid', function (done) {
+		request(app)
+			.post('/users')
+			.send({
+				email: 'asdfa',
+				password: 'bla'
+			})
 			.expect(400)
 			.end(done);
 	});
